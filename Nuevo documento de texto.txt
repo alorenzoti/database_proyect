@@ -1,0 +1,85 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2023-02-03 18:35
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Alvaro
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+ALTER TABLE `film_proyect`.`actor` 
+CHANGE COLUMN `actor_id` `actor_id` INT(11) NOT NULL ,
+CHANGE COLUMN `name` `name` VARCHAR(50) NULL DEFAULT NULL ,
+ADD PRIMARY KEY (`actor_id`);
+;
+
+ALTER TABLE `film_proyect`.`actors_has_films` 
+DROP COLUMN `film_id`,
+DROP COLUMN `actor_id`,
+ADD COLUMN `actor_actor_id` INT(11) NOT NULL FIRST,
+ADD COLUMN `film_film_id` INT(11) NOT NULL AFTER `actor_actor_id`,
+ADD PRIMARY KEY (`actor_actor_id`, `film_film_id`),
+ADD INDEX `fk_actors_has_films_film1_idx` (`film_film_id` ASC) VISIBLE;
+;
+
+ALTER TABLE `film_proyect`.`film` 
+CHANGE COLUMN `film_id` `film_id` INT(11) NOT NULL ,
+CHANGE COLUMN `title` `title` VARCHAR(1000) NULL DEFAULT NULL ,
+CHANGE COLUMN `description` `description` VARCHAR(1000) NULL DEFAULT NULL ,
+ADD PRIMARY KEY (`film_id`);
+;
+
+ALTER TABLE `film_proyect`.`inventory` 
+CHANGE COLUMN `inventory_id` `inventory_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`inventory_id`),
+ADD INDEX `fk_inventory_film1_idx` (`film_id` ASC) VISIBLE;
+;
+
+ALTER TABLE `film_proyect`.`language` 
+CHANGE COLUMN `language_id` `language_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`language_id`);
+;
+
+ALTER TABLE `film_proyect`.`rental` 
+ADD INDEX `fk_rental_inventory1_idx` (`inventory_id` ASC) VISIBLE;
+;
+
+ALTER TABLE `film_proyect`.`actors_has_films` 
+ADD CONSTRAINT `fk_actors_has_films_actor`
+  FOREIGN KEY (`actor_actor_id`)
+  REFERENCES `film_proyect`.`actor` (`actor_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_actors_has_films_film1`
+  FOREIGN KEY (`film_film_id`)
+  REFERENCES `film_proyect`.`film` (`film_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `film_proyect`.`inventory` 
+ADD CONSTRAINT `fk_inventory_film1`
+  FOREIGN KEY (`film_id`)
+  REFERENCES `film_proyect`.`film` (`film_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `film_proyect`.`language` 
+ADD CONSTRAINT `fk_language_film1`
+  FOREIGN KEY (`language_id`)
+  REFERENCES `film_proyect`.`film` (`language_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `film_proyect`.`rental` 
+ADD CONSTRAINT `fk_rental_inventory1`
+  FOREIGN KEY (`inventory_id`)
+  REFERENCES `film_proyect`.`inventory` (`inventory_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

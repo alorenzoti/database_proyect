@@ -1,0 +1,15 @@
+Executing SQL script in server
+ERROR: Error 1062: Duplicate entry '0-0' for key 'actors_has_films.PRIMARY'
+SQL Code:
+        ALTER TABLE `film_proyect`.`actors_has_films` 
+        DROP COLUMN `film_id`,
+        DROP COLUMN `actor_id`,
+        ADD COLUMN `actor_actor_id` INT(11) NOT NULL FIRST,
+        ADD COLUMN `film_film_id` INT(11) NOT NULL AFTER `actor_actor_id`,
+        ADD PRIMARY KEY (`actor_actor_id`, `film_film_id`),
+        ADD INDEX `fk_actors_has_films_film1_idx` (`film_film_id` ASC) VISIBLE
+
+SQL script execution finished: statements: 3 succeeded, 1 failed
+
+Fetching back view definitions in final form.
+Nothing to fetch
