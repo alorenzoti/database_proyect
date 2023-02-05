@@ -7,7 +7,6 @@ una vez limpios se ha pasado a realizar un esquema de la base de datos relaciona
 
 ![esquema2](https://user-images.githubusercontent.com/78368326/216839493-37f685b2-0502-4a90-8fed-149fadc1372a.PNG)
 
-
 ## BBDD
 
 Una vez realizado el esquema de la bbdd se ha vuelto al archivo denominado `cleaning and uploading' y se ha procedido a
