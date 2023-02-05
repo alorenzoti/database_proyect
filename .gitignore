@@ -131,3 +131,6 @@ dmypy.json
 *.csv
 #Pass
 pass.txt
+
+#Eso que tu sabes
+queries.txt
