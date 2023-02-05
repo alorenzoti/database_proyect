@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 #CSV
 *.csv
+#Pass
+pass.txt
