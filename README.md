@@ -14,4 +14,4 @@ la carga de los datos en la bbdd
 
 ## TXT
 
-En los archivos de texto que se encuentran dentro de este repositorio podemos ver el proceso de integración de los datos hasta que llegamos a la versión final denominada 'Schema3VALID'
+En los archivos de texto que se encuentran dentro de este repositorio en la carpeta sql podemos ver el proceso de integración de los datos hasta que llegamos a la versión final denominada 'Schema3VALID'
